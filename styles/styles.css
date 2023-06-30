@@ -1015,3 +1015,63 @@ section {
 .submit-it:focus {
     background-color: var(--color-crimson);
 }
+
+
+/* Certification Section */
+
+.certificate-wrapper {
+    display: flex;
+    height: 100vh;
+    max-width: 100%;
+  }
+  
+  .horizontal-certificates,
+  .vertical-certificates {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .horizontal-certificates {
+    border-right: 2px solid crimson;
+  }
+  
+  .horizontal-certificates img {
+    display: block;
+    width: 50vh;
+    max-height: 100%;
+    object-fit: contain;
+    border: 2px solid crimson;
+    border-radius: 10px;
+  }
+  
+  .vertical-certificates img {
+    display: block;
+    height: 55%;
+    width: auto;
+    object-fit: contain;
+    border: 2px solid crimson;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+
+  
+@media screen and (max-width: 768px) {
+    .certificate-wrapper {
+      flex-direction: column;
+    }
+  
+    .horizontal-certificates,
+    .vertical-certificates {
+      border-right: none;
+    }
+  
+    .horizontal-certificates img,
+    .vertical-certificates img {
+      width: 100%;
+      height: auto;
+      max-height: none;
+      margin-bottom: 20px;
+    }
+  }
+  
