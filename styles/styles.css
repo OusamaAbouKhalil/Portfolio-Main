@@ -1028,10 +1028,6 @@ section {
 .vertical-certificates {
   padding: 20px;
   box-sizing: border-box;
-  border: 2px solid crimson;
-  border-radius: 10px;
-  max-height: 80vh; /* Limit the maximum height to 80% of the viewport height */
-  overflow-y: auto; /* Add vertical scroll if necessary */
 }
 
 .horizontal-certificates img,
@@ -1044,11 +1040,15 @@ section {
   margin-bottom: 20px;
 }
 
+/* Add padding to the .bg-text class */
+.horizontal-certificates .bg-text,
+.vertical-certificates .bg-text {
+  padding: 10px; /* Adjust the padding as needed */
+}
+
 /* Media Queries for Larger Screens */
 @media screen and (min-width: 601px) {
   .certificate-wrapper {
-    margin-top: 30px;
-    margin-bottom: 30px;
     flex-direction: row; /* Adjust to a row layout for larger screens */
   }
 
@@ -1057,13 +1057,11 @@ section {
     flex: 1;
   }
 
-
-
   /* Adjust font sizes as needed for larger screens */
   .main-title h2,
   .main-title h2 span,
   .main-title h2 .bg-text {
     font-size: 4rem;
-      margin:10px;
   }
 }
+
