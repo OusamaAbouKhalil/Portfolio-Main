@@ -1062,7 +1062,6 @@ section {
   .main-title h2,
   .main-title h2 span,
   .main-title h2 .bg-text {
-    font-size: 2.8rem;
-      padding:10px;
+    font-size: 2.5rem;
   }
 }
