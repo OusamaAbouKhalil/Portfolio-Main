@@ -1047,7 +1047,7 @@ section {
 /* Media Queries for Larger Screens */
 @media screen and (min-width: 601px) {
   .certificate-wrapper {
-    margin-top: 48px;
+    margin-top: 30px;
     margin-bottom: 30px;
     flex-direction: row; /* Adjust to a row layout for larger screens */
   }
@@ -1055,17 +1055,15 @@ section {
   .horizontal-certificates,
   .vertical-certificates {
     flex: 1;
-    border-right: 2px solid crimson;
   }
 
-  .horizontal-certificates {
-    border-right: 2px solid crimson;
-  }
+
 
   /* Adjust font sizes as needed for larger screens */
   .main-title h2,
   .main-title h2 span,
   .main-title h2 .bg-text {
     font-size: 4rem;
+      margin:10px;
   }
 }
