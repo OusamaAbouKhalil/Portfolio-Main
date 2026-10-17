@@ -1,860 +1,820 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Developer Portfolio - Ousama Abou Khalil</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="img/Ousama Abou Khalil Avatar.webp">
-    <meta name="description"
-        content="Welcome to my portfolio! I'm a mobile developer specializing in cross-platform app development with Flutter and Firebase. Check out my projects and experience.">
-    <meta name="keywords"
-        content="mobile developer, Flutter developer, app development, cross-platform apps, Firebase, portfolio, Ousama Abou Khalil">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            list-style: none;
-        }
-
-        /* scrollbar vanish */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        /*Custom ScrollBar*/
-        ::-webkit-scrollbar-thumb {
-            background: var(--color-accent);
-            border-radius: 7px;
-        }
-
-        :root {
-            --color-primary: #1a1e2c;
-            --color-accent: #e63946;
-            --color-background: #f0f4f8;
-            --color-text: #ffffff;
-            --color-text-secondary: #a8b2d1;
-            --color-border: #2c3344;
-            --color-card: #232a3b;
-            --br-sm: 8px;
-            --br-md: 12px;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
-            --font-base: 1rem;
-            --font-lg: 1.5rem;
-            --font-xl: 2.5rem;
-            --font-xxl: 3.5rem;
-        }
-
-        body {
-            background-color: var(--color-primary);
-            font-family: "Poppins", sans-serif;
-            font-size: var(--font-base);
-            color: var(--color-text);
-            line-height: 1.6;
-            transition: all 0.3s ease;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        header {
-            min-height: 100vh;
-            overflow: hidden;
-        }
-
-        section {
-            min-height: 100vh;
-            width: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-            padding: 4rem 10%;
-        }
-
-        .container {
-            display: none;
-            transform: translateY(-100%);
-            transition: transform 0.4s ease;
-            background-color: var(--color-primary);
-        }
-
-        .active {
-            display: block;
-            animation: appear 0.6s ease forwards;
-        }
-
-        @keyframes appear {
-            to {
-                transform: translateY(0);
-            }
-        }
-
-        .controls {
-            position: fixed;
-            z-index: 10;
-            top: 50%;
-            right: 2%;
-            display: flex;
-            flex-direction: column;
-            transform: translateY(-50%);
-        }
-
-        .control {
-            padding: 1rem;
-            cursor: pointer;
-            background-color: var(--color-border);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0.5rem 0;
-            box-shadow: var(--shadow-sm);
-            transition: background-color 0.3s;
-        }
-
-        .control i {
-            font-size: 1.2rem;
-            color: var(--color-text-secondary);
-        }
-
-        .active-btn {
-            background-color: var(--color-accent) !important;
-        }
-
-        .active-btn i {
-            color: var(--color-text);
-        }
-
-        /* Reusable Components */
-        .card {
-            background-color: var(--color-card);
-            border-radius: var(--br-md);
-            padding: 2rem;
-            box-shadow: var(--shadow-md);
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            font-weight: 500;
-            transition: all 0.3s;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .btn-primary {
-            background-color: var(--color-accent);
-            color: var(--color-text);
-        }
-
-        .btn-primary:hover {
-            background-color: darken(var(--color-accent), 10%);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: var(--font-xxl);
-            font-weight: 700;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .section-title span {
-            color: var(--color-accent);
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background-color: var(--color-accent);
-            border-radius: 2px;
-        }
-
-        /* Header */
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 100vh;
-            padding: 0 10%;
-        }
-
-        .left-header {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-
-        .image {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-        }
-
-        .image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .right-header {
-            flex: 1;
-            padding-left: 4rem;
-        }
-
-        .name {
-            font-size: var(--font-xxl);
-            font-weight: 700;
-        }
-
-        .name span {
-            color: var(--color-accent);
-        }
-
-        .header-content p {
-            margin: 1.5rem 0;
-            color: var(--color-text-secondary);
-        }
-
-        /* About */
-        .about-container {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-        }
-
-        .left-about h4 {
-            font-size: var(--font-xl);
-            margin-bottom: 1rem;
-        }
-
-        .left-about p {
-            color: var(--color-text-secondary);
-        }
-
-        .right-about {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .skill-item {
-            background-color: var(--color-border);
-            padding: 0.5rem 1rem;
-            border-radius: var(--br-sm);
-            font-size: 0.9rem;
-        }
-
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 2rem;
-            border-left: 2px solid var(--color-border);
-        }
-
-        .tl-icon {
-            position: absolute;
-            left: -12px;
-            top: 0;
-            background-color: var(--color-accent);
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-        }
-
-        .tl-duration {
-            font-size: 0.8rem;
-            color: var(--color-text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-item h5 {
-            font-size: var(--font-lg);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-item p {
-            color: var(--color-text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* Portfolio */
-        .port-text {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--color-text-secondary);
-        }
-
-        .portfolios {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .portfolio-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: var(--br-md);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .portfolio-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .portfolio-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .hover-items {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: var(--color-text);
-            transform: translateY(100%);
-            transition: transform 0.3s;
-        }
-
-        .portfolio-item:hover .hover-items {
-            transform: translateY(0);
-        }
-
-        .hover-items h3 {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Contact */
-        .contact-content-con {
-            display: flex;
-            gap: 3rem;
-        }
-
-        .left-contact {
-            flex: 1;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: var(--color-text-secondary);
-        }
-
-        .contact-item i {
-            font-size: 1.5rem;
-            color: var(--color-accent);
-        }
-
-        .contact-icons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .contact-icon a {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--color-border);
-            border-radius: 50%;
-            transition: background-color 0.3s;
-        }
-
-        .contact-icon a:hover {
-            background-color: var(--color-accent);
-        }
-
-        .right-contact {
-            flex: 1;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .input-control {
-            padding: 1rem;
-            border: none;
-            border-radius: var(--br-sm);
-            background-color: var(--color-card);
-            color: var(--color-text);
-        }
-
-        .i-c-2 {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .submit-it {
-            background-color: var(--color-accent);
-            color: var(--color-text);
-            border: none;
-            padding: 1rem;
-            border-radius: var(--br-sm);
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-weight: 500;
-        }
-
-        .submit-it:hover {
-            background-color: darken(var(--color-accent), 10%);
-        }
-
-        /* Certificates */
-        .certificate-wrapper {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .certificate-wrapper img {
-            width: 100%;
-            border-radius: var(--br-md);
-            box-shadow: var(--shadow-sm);
-        }
-
-        /* Media Queries */
-        @media (max-width: 1200px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .right-header {
-                padding-left: 0;
-                margin-top: 2rem;
-            }
-
-            .about-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            section {
-                padding: 3rem 5%;
-            }
-
-            .section-title {
-                font-size: var(--font-xl);
-            }
-
-            .controls {
-                flex-direction: row;
-                bottom: 0;
-                top: auto;
-                left: 0;
-                width: 100%;
-                justify-content: center;
-                background-color: var(--color-card);
-                padding: 1rem 0;
-            }
-
-            .contact-content-con {
-                flex-direction: column;
-            }
-
-            .i-c-2 {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .image {
-                width: 200px;
-                height: 200px;
-            }
-
-            .name {
-                font-size: var(--font-xl);
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ousama Abou Khalil, Mobile & Web Developer. Builder of OEG (Our Easy Game), IYKNO, Clip Kitchen and SwiftGo. React Native, Flutter, Firebase, React." />
+  <title>Ousama Abou Khalil | Mobile & Web Developer</title>
+
+  <link rel="canonical" href="https://ousamaaboukhalil.github.io/Portfolio-Main/" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ousama Abou Khalil | Mobile & Web Developer" />
+  <meta property="og:description" content="Builder of OEG, IYKNO, Clip Kitchen and SwiftGo. React Native, Flutter, Firebase, Supabase." />
+  <meta property="og:url" content="https://ousamaaboukhalil.github.io/Portfolio-Main/" />
+  <meta property="og:image" content="https://ousamaaboukhalil.github.io/Portfolio-Main/assets/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ousama Abou Khalil | Mobile & Web Developer" />
+  <meta name="twitter:description" content="Builder of OEG, IYKNO, Clip Kitchen and SwiftGo. React Native, Flutter, Firebase, Supabase." />
+  <meta name="twitter:image" content="https://ousamaaboukhalil.github.io/Portfolio-Main/assets/og.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ousama Abou Khalil",
+    "jobTitle": "Mobile & Web Developer",
+    "email": "mailto:ousamaaboukhalil@gmail.com",
+    "telephone": "+96181238678",
+    "url": "https://ousamaaboukhalil.github.io/Portfolio-Main/",
+    "image": "https://ousamaaboukhalil.github.io/Portfolio-Main/assets/ousama.jpg",
+    "address": { "@type": "PostalAddress", "addressLocality": "Beirut", "addressCountry": "LB" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Lebanese International University" },
+    "knowsAbout": ["React Native", "Flutter", "Firebase", "Supabase", "React", "Java", "PHP", "MySQL"],
+    "sameAs": [
+      "https://github.com/OusamaAbouKhalil",
+      "https://www.linkedin.com/in/ousama-abou-khalil",
+      "https://www.instagram.com/the_ousama"
+    ]
+  }
+  </script>
+
+  <!-- Analytics: create a GA4 property, replace G-XXXXXXXXXX below, then uncomment.
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
+<body>
 
-<body class="main-content">
-    <header class="container header active" id="home">
-        <div class="header-content">
-            <div class="left-header">
-                <div class="image">
-                    <img id="avatar" src="img/Ousama Abou Khalil Avatar.webp" alt="Ousama Abou Khalil">
-                </div>
-            </div>
-            <div class="right-header">
-                <h1 class="name">
-                    Hi, I'm <span>Ousama Abou Khalil.</span><br>
-                    A Mobile App Developer.
-                </h1>
-                <p>
-                    Experienced mobile developer creating user-friendly and reliable apps, adept at troubleshooting and teamwork, passionate about learning new technologies and best practices.
-                </p>
-                <div class="btn-con">
-                    <a href="doc/Osama_Abou_Khalil_CV.pdf" class="btn btn-primary">
-                        <span class="btn-text">Download CV</span>
-                        <i class="fas fa-download" style="margin-left: 0.5rem;"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-    <main>
-        <section class="container about" id="about">
-            <h2 class="section-title">About <span>Me</span></h2>
-            <div class="about-container">
-                <div class="left-about card">
-                    <h4>Information About Me</h4>
-                    <p>
-                        Experienced mobile developer creating user-friendly and reliable apps, adept at troubleshooting and teamwork, passionate about learning new technologies and best practices.
-                    </p>
-                    <div class="btn-con">
-                        <a href="doc/Osama_Abou_Khalil_CV.pdf" class="btn btn-primary">
-                            <span class="btn-text">Download CV</span>
-                            <i class="fas fa-download" style="margin-left: 0.5rem;"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="right-about">
-                    <div class="card">
-                        <h4 class="stat-title">My Skills</h4>
-                        <div class="skills-list">
-                            <span class="skill-item">Java</span>
-                            <span class="skill-item">Dart</span>
-                            <span class="skill-item">PHP</span>
-                            <span class="skill-item">Firebase</span>
-                            <span class="skill-item">RESTful APIs</span>
-                            <span class="skill-item">SQL</span>
-                            <span class="skill-item">MySQL</span>
-                            <span class="skill-item">Flutter</span>
-                            <span class="skill-item">HTML5</span>
-                            <span class="skill-item">CSS3</span>
-                            <span class="skill-item">JavaScript</span>
-                            <span class="skill-item">jQuery</span>
-                            <span class="skill-item">Visual Studio Code</span>
-                            <span class="skill-item">Git</span>
-                            <span class="skill-item">Unit Testing</span>
-                            <span class="skill-item">OOP</span>
-                            <span class="skill-item">MVC</span>
-                            <span class="skill-item">MVVM</span>
-                        </div>
-                    </div>
-                    <h4 class="stat-title">My Timeline</h4>
-                    <div class="timeline">
-                        <div class="timeline-item card">
-                            <div class="tl-icon"></div>
-                            <p class="tl-duration">July 2025 – Present</p>
-                            <h5>Mobile Development Tutor <span> - Warshe961, Lebanon (Remote, Part-time)</span></h5>
-                            <p>
-                                - Designed and delivered hands-on lessons in mobile app development using Flutter and Firebase for college and university students.<br>
-                                - Mentored students through building real-world apps, from UI/UX design to API integration and state management.<br>
-                                - Guided learners on best practices for performance optimization, secure authentication, and app deployment to Google Play & App Store.
-                            </p>
-                        </div>
-                        <div class="timeline-item card">
-                            <div class="tl-icon"></div>
-                            <p class="tl-duration">September 2023 – Present</p>
-                            <h5>Mobile App Developer <span> - Swift Go – Infinite Realm, Lebanon (On-site)</span></h5>
-                            <p>
-                                - Spearheaded the development of Swift Go, a dynamic ride-hailing and food delivery app tailored for the Lebanese market.<br>
-                                - Built robust, scalable cross-platform mobile apps using Flutter and Firebase.<br>
-                                - Designed intuitive, responsive UIs with real-time updates and localization support.<br>
-                                - Ensured compliance with Google Play and App Store guidelines for seamless deployment and updates.<br>
-                                - Collaborated closely with design, marketing, and operations teams to launch new features based on user feedback.
-                            </p>
-                        </div>
-                        <div class="timeline-item card">
-                            <div class="tl-icon"></div>
-                            <p class="tl-duration">June 2023 - September 2023</p>
-                            <h5>Mobile App Developer Intern <span> - Cedars Byte, Lebanon (Beirut)</span></h5>
-                            <p>
-                                - Assisted in the development of mobile applications for various platforms using native and cross-platform technologies.<br>
-                                - Worked with back-end team to integrate RESTful APIs and Firebase services.<br>
-                                - Conducted testing and debugging to ensure high-quality and bug-free applications.
-                            </p>
-                        </div>
-                        <div class="timeline-item card">
-                            <div class="tl-icon"></div>
-                            <p class="tl-duration">March 2020 - February 2021</p>
-                            <h5>Software Engineer Intern <span> - Dolly Soft, Lebanon (Tyr)</span></h5>
-                            <p>
-                                - Improved project performance by collaborating with the back-end team and implementing best practices in API development.<br>
-                                - Documented technical workflows and conducted code reviews to ensure streamlined and efficient project development.
-                            </p>
-                        </div>
-                        <div class="timeline-item card">
-                            <div class="tl-icon"></div>
-                            <p class="tl-duration">2020 – 2024</p>
-                            <h5>B.S. in Computer Science <span> - Lebanese International University</span></h5>
-                            <p>
-                                School of Arts and Science.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="container" id="portfolio">
-            <h2 class="section-title">My <span>Portfolio</span></h2>
-            <p class="port-text">
-                Here are some of my projects in mobile and web development.
-            </p>
-            <div class="portfolios">
-                <div class="portfolio-item">
-                    <img src="img/taxi.webp" alt="Swift Go Drivers">
-                    <div class="hover-items">
-                        <h3>Swift Go (Play Store, App Store)</h3>
-                        <div class="icons">
-                            <a href="https://swiftgo.online" class="icon">
-                                <i class="fab fa-globe"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="img/IconApp.png" alt="Swift Go Rides And More">
-                    <div class="hover-items">
-                        <h3>Swift Go Drivers</h3>
-                        <div class="icons">
-                            <a href="https://swiftgo.online" class="icon">
-                                <i class="fab fa-globe"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="img/instagram_Clone.jpg" alt="Instagram Clone">
-                    <div class="hover-items">
-                        <h3>Instagram Clone</h3>
-                        <div class="icons">
-                            <a href="https://github.com/OusamaAbouKhalil/Instagram_Clone_Flutter" class="icon">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="img/Whatsapp_Clone.png" alt="Whatsapp Clone">
-                    <div class="hover-items">
-                        <h3>WhatsApp Clone</h3>
-                        <div class="icons">
-                            <a href="https://github.com/OusamaAbouKhalil/WhatsappClone" class="icon">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="img/shop.png" alt="Shop App Flutter">
-                    <div class="hover-items">
-                        <h3>Shop-App (Flutter)</h3>
-                        <div class="icons">
-                            <a href="https://github.com/OusamaAbouKhalil/Shop-App-Flutter" class="icon">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="img/coffee-shop.jpg" alt="Coffeeshop Online DB">
-                    <div class="hover-items">
-                        <h3>Coffeeshop Online DB</h3>
-                        <div class="icons">
-                            <a href="https://github.com/OusamaAbouKhalil/Coffeeshop-onlineDB" class="icon">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="img/bookSite.png" alt="Online Book Store">
-                    <div class="hover-items">
-                        <h3>Online Book Store</h3>
-                        <div class="icons">
-                            <a href="https://betweenthewords.000webhostapp.com/" class="icon">
-                                <i class="fab fa-globe"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="img/LibraryManagementSystem.jpg" alt="Library Management System">
-                    <div class="hover-items">
-                        <h3>Library Management System</h3>
-                        <div class="icons">
-                            <a href="https://github.com/OusamaAbouKhalil/LibraryManagmentSystem" class="icon">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="img/pt.png" alt="Penetration Testing Tools">
-                    <div class="hover-items">
-                        <h3>Penetration Testing Tools</h3>
-                        <div class="icons">
-                            <a href="https://github.com/OusamaAbouKhalil/Penetration-testing-simple-tools" class="icon">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Add more projects as needed from CV -->
-            </div>
-        </section>
-        <section class="container contact" id="contact">
-            <h2 class="section-title">Contact <span>Me</span></h2>
-            <div class="contact-content-con">
-                <div class="left-contact">
-                    <h4>Contact Me Here</h4>
-                    <p>I am available upon request.</p>
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Beirut, Lebanon</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>ousamaaboukhalil@gmail.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>+961 81 238 678</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-globe-africa"></i>
-                            <span>Languages: English (Business Fluent), Arabic (Native)</span>
-                        </div>
-                    </div>
-                    <div class="contact-icons">
-                        <a href="https://www.instagram.com/the_ousama/" target="_blank">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://github.com/OusamaAbouKhalil" target="_blank">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/ousama-abou-khalil" target="_blank">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="right-contact">
-                    <form action="https://formsubmit.co/ousamaaboukhalil@gmail.com" method="POST" class="contact-form">
-                        <div class="input-control i-c-2">
-                            <input type="text" required placeholder="Your Name">
-                            <input type="email" name="email" required placeholder="Your Email">
-                        </div>
-                        <div class="input-control">
-                            <input type="text" name="subject" required placeholder="Subject">
-                        </div>
-                        <div class="input-control">
-                            <textarea name="message" cols="30" rows="8" placeholder="Message Here..."></textarea>
-                        </div>
-                        <button type="submit" class="submit-it">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-        <section class="container certificate" id="certificate">
-            <h2 class="section-title">My <span>Certifications</span></h2>
-            <div class="certificate-wrapper">
-                <img src="img/ccna2.png" alt="Routing and Switching Essentials">
-                <img src="img/ccna22.png" alt="Introduction to Networks">
-                <img src="img/certMeta.png" alt="Android Development – Meta">
-                <img src="img/android.png" alt="Programming Hub: Android Development">
-                <img src="img/webmimo.png" alt="Web Development">
-                <img src="img/programminhub.png" alt="Programming Hub: Java">
-                <img src="img/pythonhub.png" alt="Programming Hub: Python">
-                <img src="img/cedarsbyte.png" alt="Cedars Byte Internship">
-                <img src="img/DollySoft.jpeg" alt="Dolly Soft Internship">
-                <!-- Add more if images available -->
-            </div>
-        </section>
-    </main>
-
-    <div class="controls">
-        <div class="control active-btn" data-id="home">
-            <i class="fas fa-home"></i>
-        </div>
-        <div class="control" data-id="about">
-            <i class="fas fa-user"></i>
-        </div>
-        <div class="control" data-id="portfolio">
-            <i class="fas fa-briefcase"></i>
-        </div>
-        <div class="control" data-id="certificate">
-            <i class="fas fa-certificate"></i>
-        </div>
-        <div class="control" data-id="contact">
-            <i class="fas fa-envelope-open"></i>
-        </div>
+  <!-- ================= NAV ================= -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="logo" aria-label="Back to top">
+        <span class="logo-mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="logo-text">ousama<span class="logo-dot">.dev</span></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#apps" class="nav-link">Apps</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+      <a href="#contact" class="btn btn-sm btn-primary nav-cta">Hire Me</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <script>
-        (function () {
-            [...document.querySelectorAll(".control")].forEach(button => {
-                button.addEventListener("click", function () {
-                    document.querySelector(".active-btn").classList.remove("active-btn");
-                    this.classList.add("active-btn");
-                    document.querySelector(".active").classList.remove("active");
-                    document.getElementById(button.dataset.id).classList.add("active");
-                })
-            });
-        })();
-    </script>
-</body>
+  </header>
 
+  <!-- ================= HERO ================= -->
+  <main id="top">
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="grid-overlay"></div>
+      </div>
+      <div class="container hero-inner">
+        <h1 class="hero-title reveal">
+          Hi, I'm <span class="accent">Ousama Abou Khalil</span>
+        </h1>
+        <p class="hero-role reveal">
+          <span class="mono">&gt;</span> <span id="typed"></span><span class="caret" aria-hidden="true"></span>
+        </p>
+        <p class="hero-sub reveal">
+          Experienced mobile developer creating user-friendly, reliable apps.
+          I build cross-platform products end to end, from UI to cloud infrastructure,
+          including <strong>OEG (Our Easy Game)</strong>, <strong>IYKNO</strong>,
+          <strong>Clip Kitchen</strong> and <strong>SwiftGo</strong>.
+        </p>
+        <div class="hero-actions reveal">
+          <a href="#apps" class="btn btn-primary">
+            See My Apps
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          </a>
+          <a href="assets/Ousama-Abou-Khalil-CV.pdf" class="btn btn-ghost" download>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+            Download CV
+          </a>
+          <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+        </div>
+        <div class="hero-socials reveal">
+          <a href="https://github.com/OusamaAbouKhalil" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.17c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/ousama-abou-khalil" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"/></svg>
+          </a>
+          <a href="mailto:ousamaaboukhalil@gmail.com" aria-label="Email">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <a href="#stats" class="scroll-hint" aria-label="Scroll down">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </a>
+    </section>
+
+    <!-- ================= STATS ================= -->
+    <section class="stats" id="stats">
+      <div class="container stats-grid">
+        <div class="stat reveal">
+          <span class="stat-num mono" data-count="20000" data-suffix="+">0</span>
+          <span class="stat-label">Users migrated, zero downtime</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-num mono" data-count="5" data-suffix="+">0</span>
+          <span class="stat-label">Years of experience</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-num mono" data-count="15" data-suffix="+">0</span>
+          <span class="stat-label">Apps &amp; websites shipped</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-num mono" data-count="2" data-suffix="">0</span>
+          <span class="stat-label">Stores: Google Play &amp; App Store</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="about-photo reveal">
+          <img src="assets/ousama.jpg" alt="Ousama Abou Khalil" width="320" height="320" loading="lazy" />
+        </div>
+        <div class="about-text">
+          <p class="section-eyebrow reveal mono">01 · about me</p>
+          <h2 class="section-title reveal">Who I Am</h2>
+          <p class="reveal">
+            I'm Ousama, a mobile and web developer from Beirut, Lebanon. I've spent the
+            last five years shipping real products: a tutoring platform serving 20,000+
+            students, a ride-hailing and delivery ecosystem for the Lebanese market, and
+            content apps used daily by creators.
+          </p>
+          <p class="reveal">
+            I work across the whole stack: React Native and Flutter on the front,
+            Firebase and Supabase behind, CI/CD and store releases to close the loop.
+            I also tutor college students in mobile development at Warshe961, because
+            explaining something well is the best proof you understand it.
+          </p>
+          <div class="about-facts reveal">
+            <span class="chip big">Beirut, Lebanon</span>
+            <span class="chip big">B.S. Computer Science</span>
+            <span class="chip big">English &amp; Arabic</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURED APPS ================= -->
+    <section class="section section-alt" id="apps">
+      <div class="container">
+        <p class="section-eyebrow reveal mono">02 · featured work</p>
+        <h2 class="section-title reveal">Apps I Built</h2>
+        <p class="section-sub reveal">Products I designed, developed and shipped, end to end.</p>
+
+        <div class="apps-list">
+
+          <!-- OEG (Our Easy Game) -->
+          <article class="app-card reveal" data-tilt>
+            <div class="app-info">
+              <span class="app-tag" style="--tag:#A855F7">Flagship · Our Easy Game Tutoring LLC</span>
+              <div class="app-head">
+                <img class="app-icon" src="assets/oeg-icon.png" alt="OEG app icon" width="56" height="56" loading="lazy" />
+                <h3 class="app-name">OEG: Online Tutors &amp; Lessons</h3>
+              </div>
+              <p class="app-desc">
+                Our Easy Game (OEG) is a private tutor in your pocket, 24/7. Students post
+                a request and verified expert tutors bid to help with homework, exams and
+                thesis work across 100+ subjects. I lead development across mobile and web,
+                and executed a full migration of 20,000+ users with
+                <strong>zero downtime</strong> and no data-integrity issues.
+              </p>
+              <ul class="app-points">
+                <li>Backend integrations, authentication systems &amp; APIs</li>
+                <li>Cloud infrastructure &amp; admin dashboards</li>
+                <li>CI/CD workflows, testing &amp; multi-platform releases</li>
+              </ul>
+              <div class="chip-row">
+                <span class="chip">Flutter</span><span class="chip">Firebase</span><span class="chip">REST APIs</span><span class="chip">CI/CD</span>
+              </div>
+              <div class="store-links">
+                <a class="store-btn" href="https://apps.apple.com/us/app/oeg-online-tutors-lessons/id6444192194" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                  App Store
+                </a>
+                <a class="store-btn" href="https://oureasygame.com" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  oureasygame.com
+                </a>
+              </div>
+            </div>
+            <div class="app-visual" style="--glow:#A855F7">
+              <img class="store-shot" src="assets/oeg-shot.webp" alt="OEG app screenshot: tutors bid on your request" loading="lazy" />
+            </div>
+          </article>
+
+          <!-- IYKNO -->
+          <article class="app-card alt reveal" data-tilt>
+            <div class="app-info">
+              <span class="app-tag" style="--tag:#FACC15">Live on both stores</span>
+              <div class="app-head">
+                <img class="app-icon" src="assets/iykno-icon.png" alt="IYKNO app icon" width="56" height="56" loading="lazy" />
+                <h3 class="app-name">IYKNO: Tutors &amp; Homework Help</h3>
+              </div>
+              <p class="app-desc">
+                Homework help from real tutors, completely AI-free. Students post a
+                question, verified tutors reply with a price, and every delivery ships
+                with an integrity report. I built the app in React Native from the ground
+                up: architecture, UI/UX, real-time data and release to both stores.
+              </p>
+              <ul class="app-points">
+                <li>Full product build: design to deployment</li>
+                <li>Real-time chat, requests &amp; tutor bidding</li>
+                <li>Store-compliant release pipeline</li>
+              </ul>
+              <div class="chip-row">
+                <span class="chip">React Native</span><span class="chip">Supabase</span><span class="chip">REST APIs</span>
+              </div>
+              <div class="store-links">
+                <a class="store-btn" href="https://apps.apple.com/us/app/iykno-tutors-homework-help/id6791797037" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                  App Store
+                </a>
+                <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.oureasygame.oeg" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.25-.84-.76-.84-1.35m13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27m3.35-4.31c.34.27.59.69.59 1.19s-.22.9-.57 1.18l-2.29 1.32-2.5-2.5 2.5-2.5 2.27 1.31M6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/></svg>
+                  Google Play
+                </a>
+                <a class="store-btn" href="https://iykno.app" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  iykno.app
+                </a>
+              </div>
+            </div>
+            <div class="app-visual" style="--glow:#FACC15">
+              <img class="store-shot" src="assets/iykno-shot.webp" alt="IYKNO app screenshot: post the question, any subject" loading="lazy" />
+            </div>
+          </article>
+
+          <!-- Clip Kitchen -->
+          <article class="app-card reveal" data-tilt>
+            <div class="app-info">
+              <span class="app-tag" style="--tag:#3B82F6">Live on both stores</span>
+              <div class="app-head">
+                <img class="app-icon" src="assets/clip-icon.png" alt="Clip Kitchen app icon" width="56" height="56" loading="lazy" />
+                <h3 class="app-name">Clip Kitchen: Video Editing</h3>
+              </div>
+              <p class="app-desc">
+                Content, served daily. Users send raw clips straight off the job, real
+                editors turn them into finished reels, and the app publishes them to
+                Instagram, TikTok, Facebook and YouTube. Includes a library of trending
+                reels to copy what already works. Built in React Native with a media-heavy,
+                fast UI and a cloud-backed pipeline from upload to approval.
+              </p>
+              <ul class="app-points">
+                <li>Media-heavy UI with smooth performance</li>
+                <li>Cloud storage, upload &amp; review pipeline</li>
+                <li>Cross-platform delivery, single codebase</li>
+              </ul>
+              <div class="chip-row">
+                <span class="chip">React Native</span><span class="chip">Supabase</span><span class="chip">Cloud APIs</span>
+              </div>
+              <div class="store-links">
+                <a class="store-btn" href="https://apps.apple.com/us/app/clip-kitchen-video-editing/id6796904408" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                  App Store
+                </a>
+                <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.clipkitchen.app" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.25-.84-.76-.84-1.35m13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27m3.35-4.31c.34.27.59.69.59 1.19s-.22.9-.57 1.18l-2.29 1.32-2.5-2.5 2.5-2.5 2.27 1.31M6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/></svg>
+                  Google Play
+                </a>
+                <a class="store-btn" href="https://theclipkitchen.com" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  theclipkitchen.com
+                </a>
+              </div>
+            </div>
+            <div class="app-visual" style="--glow:#3B82F6">
+              <img class="store-shot" src="assets/clip-shot.webp" alt="Clip Kitchen app screenshot: copy the reels that already work" loading="lazy" />
+            </div>
+          </article>
+
+          <!-- Swift Go -->
+          <article class="app-card alt reveal" data-tilt>
+            <div class="app-info">
+              <span class="app-tag" style="--tag:#2DD4BF">Live on both stores</span>
+              <div class="app-head">
+                <img class="app-icon" src="assets/swiftgo-icon.png" alt="SwiftGo app icon" width="56" height="56" loading="lazy" />
+                <h3 class="app-name">SwiftGo: Food Delivery &amp; Rides</h3>
+              </div>
+              <p class="app-desc">
+                A dynamic ride-hailing and food delivery platform tailored for the Lebanese
+                market. I spearheaded the whole ecosystem: rider app, driver app, store
+                panel and admin panel, with real-time tracking and localization.
+              </p>
+              <ul class="app-points">
+                <li>4-app ecosystem: rider, driver, store, admin</li>
+                <li>Real-time updates &amp; localization support</li>
+                <li>Compliant releases on both stores</li>
+              </ul>
+              <div class="chip-row">
+                <span class="chip">Flutter</span><span class="chip">Firebase</span><span class="chip">Maps / Real-time</span>
+              </div>
+              <div class="store-links">
+                <a class="store-btn" href="https://apps.apple.com/us/app/swift-go/id6698877609" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                  App Store
+                </a>
+                <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.infiniterealm.swiftgo" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.25-.84-.76-.84-1.35m13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27m3.35-4.31c.34.27.59.69.59 1.19s-.22.9-.57 1.18l-2.29 1.32-2.5-2.5 2.5-2.5 2.27 1.31M6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/></svg>
+                  Google Play
+                </a>
+                <a class="store-btn" href="https://swiftgo.online" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  swiftgo.online
+                </a>
+              </div>
+            </div>
+            <div class="app-visual" style="--glow:#2DD4BF">
+              <img class="store-shot" src="assets/swiftgo-shot.webp" alt="SwiftGo app screenshot: Lebanon's best food, delivered" loading="lazy" />
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section class="section" id="experience">
+      <div class="container">
+        <p class="section-eyebrow reveal mono">03 · career</p>
+        <h2 class="section-title reveal">Experience</h2>
+
+        <div class="timeline">
+          <div class="tl-item reveal">
+            <div class="tl-dot current" aria-hidden="true"></div>
+            <div class="tl-card">
+              <div class="tl-head">
+                <h3>Mobile &amp; Web Developer</h3>
+                <span class="tl-date mono">Sep 2025 - Present</span>
+              </div>
+              <p class="tl-company">Our Easy Game LLC · Remote</p>
+              <ul>
+                <li>Lead development of cross-platform mobile apps and modern web solutions.</li>
+                <li>Spearheaded major releases improving performance, scalability, security and UX.</li>
+                <li>Executed a migration affecting 20,000+ users with zero downtime and no data-integrity issues.</li>
+                <li>Designed backend integrations, auth systems, APIs, cloud infrastructure and admin dashboards.</li>
+                <li>Managed testing, CI/CD workflows, deployments and releases across platforms.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-dot current" aria-hidden="true"></div>
+            <div class="tl-card">
+              <div class="tl-head">
+                <h3>Mobile Development Tutor</h3>
+                <span class="tl-date mono">Jul 2025 - Present</span>
+              </div>
+              <p class="tl-company">Warshe961 · Lebanon, Remote (Part-time)</p>
+              <ul>
+                <li>Design and deliver hands-on Flutter &amp; Firebase lessons for college and university students.</li>
+                <li>Mentor students through building real-world apps - UI/UX to API integration and state management.</li>
+                <li>Guide learners on performance, secure authentication and store deployment best practices.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-dot current" aria-hidden="true"></div>
+            <div class="tl-card">
+              <div class="tl-head">
+                <h3>Mobile App Developer</h3>
+                <span class="tl-date mono">Sep 2023 - Present</span>
+              </div>
+              <p class="tl-company">Swift Go - Infinite Realm · Lebanon, On-site</p>
+              <ul>
+                <li>Spearheaded Swift Go, a ride-hailing and food delivery app for the Lebanese market.</li>
+                <li>Built robust, scalable cross-platform apps with Flutter and Firebase.</li>
+                <li>Designed intuitive, responsive UIs with real-time updates and localization.</li>
+                <li>Ensured Google Play and App Store compliance for seamless releases.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <div class="tl-card">
+              <div class="tl-head">
+                <h3>Mobile App Developer Intern</h3>
+                <span class="tl-date mono">Jun 2023 - Sep 2023</span>
+              </div>
+              <p class="tl-company">Cedars Byte · Beirut, Lebanon</p>
+              <ul>
+                <li>Built mobile apps with native and cross-platform technologies.</li>
+                <li>Integrated RESTful APIs and Firebase services with the back-end team.</li>
+                <li>Tested and debugged to ship high-quality, bug-free applications.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <div class="tl-card">
+              <div class="tl-head">
+                <h3>Software Engineer Intern</h3>
+                <span class="tl-date mono">Mar 2020 - Feb 2021</span>
+              </div>
+              <p class="tl-company">Dolly Soft · Tyr, Lebanon</p>
+              <ul>
+                <li>Improved project performance through API development best practices.</li>
+                <li>Documented technical workflows and conducted code reviews.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section class="section section-alt" id="projects">
+      <div class="container">
+        <p class="section-eyebrow reveal mono">04 · more work</p>
+        <h2 class="section-title reveal">Other Projects</h2>
+
+        <div class="filters reveal" role="group" aria-label="Filter projects">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+          <button class="filter-btn" data-filter="web">Websites</button>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+          <article class="project-card reveal" data-cat="mobile">
+            <div class="pc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+            <h3>Swift Go Drivers</h3>
+            <p>Driver companion app: trip management, earnings and live navigation.</p>
+            <div class="chip-row"><span class="chip">Flutter</span><span class="chip">Firebase</span></div>
+          </article>
+          <article class="project-card reveal" data-cat="web">
+            <div class="pc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg></div>
+            <h3>Swift Go Admin &amp; Store Panels</h3>
+            <p>Operations dashboards: orders, fleet, stores and analytics.</p>
+            <div class="chip-row"><span class="chip">React</span><span class="chip">REST APIs</span></div>
+          </article>
+          <article class="project-card reveal" data-cat="mobile">
+            <div class="pc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.4 8.4 8.5 8.5 0 0 1-3.8-.9L3 21l2-5.8a8.38 8.38 0 0 1-.9-3.7 8.5 8.5 0 0 1 8.5-8.5 8.38 8.38 0 0 1 8.4 8.5z"/></svg></div>
+            <h3>WhatsApp Clone</h3>
+            <p>Real-time chat with media sharing, presence and push notifications.</p>
+            <div class="chip-row"><span class="chip">Flutter</span><span class="chip">Firebase</span></div>
+          </article>
+          <article class="project-card reveal" data-cat="mobile">
+            <div class="pc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></div>
+            <h3>Instagram Clone</h3>
+            <p>Feed, stories, likes and comments with cloud image pipeline.</p>
+            <div class="chip-row"><span class="chip">Flutter</span><span class="chip">Firebase</span></div>
+            <a class="pc-link" href="https://github.com/OusamaAbouKhalil/Instagram_Clone_Flutter" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.17c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              View Code
+            </a>
+          </article>
+          <article class="project-card reveal" data-cat="mobile">
+            <div class="pc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
+            <h3>Shop-App</h3>
+            <p>Flutter e-commerce app: catalog, cart and order management.</p>
+            <div class="chip-row"><span class="chip">Flutter</span><span class="chip">SQL</span></div>
+            <a class="pc-link" href="https://github.com/OusamaAbouKhalil/Shop-App-Flutter" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.17c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              View Code
+            </a>
+          </article>
+          <article class="project-card reveal" data-cat="mobile">
+            <div class="pc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/></svg></div>
+            <h3>Coffeeshop Online DB</h3>
+            <p>Coffee ordering app backed by an online database.</p>
+            <div class="chip-row"><span class="chip">Flutter</span><span class="chip">MySQL</span></div>
+            <a class="pc-link" href="https://github.com/OusamaAbouKhalil/Coffeeshop-onlineDB" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.17c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              View Code
+            </a>
+          </article>
+          <article class="project-card reveal" data-cat="web">
+            <div class="pc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div>
+            <h3>BeSweet</h3>
+            <p>Brand website with clean, responsive design.</p>
+            <div class="chip-row"><span class="chip">JavaScript</span><span class="chip">PHP</span></div>
+          </article>
+          <article class="project-card reveal" data-cat="web">
+            <div class="pc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 5-6"/></svg></div>
+            <h3>RaysLab</h3>
+            <p>Website for a digital marketing company.</p>
+            <div class="chip-row"><span class="chip">JavaScript</span><span class="chip">jQuery</span></div>
+          </article>
+          <article class="project-card reveal" data-cat="web">
+            <div class="pc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4m-2-2v4m7-3h.01M18 13h.01"/></svg></div>
+            <h3>Game Hive</h3>
+            <p>Gaming web platform with library and discovery features.</p>
+            <div class="chip-row"><span class="chip">PHP</span><span class="chip">MySQL</span></div>
+            <a class="pc-link" href="https://github.com/OusamaAbouKhalil/GameHive" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.17c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              View Code
+            </a>
+          </article>
+          <article class="project-card reveal" data-cat="web">
+            <div class="pc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+            <h3>Library Management System</h3>
+            <p>Catalog, lending and member management for libraries.</p>
+            <div class="chip-row"><span class="chip">Java</span><span class="chip">SQL</span></div>
+            <a class="pc-link" href="https://github.com/OusamaAbouKhalil/LibraryManagmentSystem" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.17c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              View Code
+            </a>
+          </article>
+          <article class="project-card reveal" data-cat="web">
+            <div class="pc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+            <h3>Online Book Store</h3>
+            <p>Browse, search and purchase books online.</p>
+            <div class="chip-row"><span class="chip">PHP</span><span class="chip">MySQL</span></div>
+          </article>
+          <article class="project-card reveal" data-cat="web">
+            <div class="pc-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <h3>Penetration Testing Tools</h3>
+            <p>Web toolkit for security testing and learning.</p>
+            <div class="chip-row"><span class="chip">JavaScript</span><span class="chip">Security</span></div>
+            <a class="pc-link" href="https://github.com/OusamaAbouKhalil/Penetration-testing-simple-tools" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.17c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              View Code
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section class="section" id="skills">
+      <div class="container">
+        <p class="section-eyebrow reveal mono">05 · toolbox</p>
+        <h2 class="section-title reveal">Skills &amp; Technologies</h2>
+
+        <div class="skills-grid">
+          <div class="skill-group reveal">
+            <h3>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+              Mobile &amp; Frontend
+            </h3>
+            <div class="chip-row">
+              <span class="chip big">React Native</span><span class="chip big">Flutter</span><span class="chip big">Dart</span><span class="chip big">React</span>
+              <span class="chip big">JavaScript</span><span class="chip big">jQuery</span>
+            </div>
+          </div>
+          <div class="skill-group reveal">
+            <h3>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+              Backend &amp; Data
+            </h3>
+            <div class="chip-row">
+              <span class="chip big">Java</span><span class="chip big">PHP</span><span class="chip big">Firebase</span><span class="chip big">Supabase</span>
+              <span class="chip big">RESTful APIs</span><span class="chip big">SQL</span><span class="chip big">MySQL</span>
+            </div>
+          </div>
+          <div class="skill-group reveal">
+            <h3>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              Tools &amp; Practices
+            </h3>
+            <div class="chip-row">
+              <span class="chip big">Git</span><span class="chip big">CI/CD</span><span class="chip big">Unit Testing</span>
+              <span class="chip big">OOP</span><span class="chip big">MVC</span><span class="chip big">MVVM</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="edu-grid">
+          <div class="edu-card reveal">
+            <h3>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+              Education
+            </h3>
+            <p class="edu-main">B.S. in Computer Science</p>
+            <p class="edu-sub">Lebanese International University · 2020 - 2024</p>
+          </div>
+          <div class="edu-card reveal">
+            <h3>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              Languages
+            </h3>
+            <p class="edu-sub">English - Business Fluent</p>
+            <p class="edu-sub">Arabic - Native</p>
+          </div>
+        </div>
+
+        <h3 class="certs-title reveal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.5 13 17 22l-5-3-5 3 1.5-9"/></svg>
+          Certifications
+        </h3>
+        <p class="section-sub reveal">Click any certificate to view it full size.</p>
+
+        <div class="certs-grid">
+          <button class="cert-card reveal" data-img="assets/certs/ccna2.webp" aria-label="View CCNA Routing and Switching certificate">
+            <img src="assets/certs/ccna2.webp" alt="Cisco CCNA Routing and Switching certificate" loading="lazy" />
+            <span class="cert-name">CCNA Routing &amp; Switching</span>
+            <span class="cert-issuer">Cisco Networking Academy · 2023</span>
+          </button>
+          <button class="cert-card reveal" data-img="assets/certs/ccna22.webp" aria-label="View Introduction to Networks certificate">
+            <img src="assets/certs/ccna22.webp" alt="Cisco Introduction to Networks certificate" loading="lazy" />
+            <span class="cert-name">Introduction to Networks</span>
+            <span class="cert-issuer">Cisco Networking Academy · 2022</span>
+          </button>
+          <button class="cert-card reveal" data-img="assets/certs/certMeta.webp" aria-label="View Meta Android Development certificate">
+            <img src="assets/certs/certMeta.webp" alt="Meta Android Development certificate via Coursera" loading="lazy" />
+            <span class="cert-name">Android Development</span>
+            <span class="cert-issuer">Meta · Coursera · 2023</span>
+          </button>
+          <button class="cert-card reveal" data-img="assets/certs/android.webp" aria-label="View Programming Hub Android Development certificate">
+            <img src="assets/certs/android.webp" alt="Programming Hub Android Development certificate" loading="lazy" />
+            <span class="cert-name">Android Development</span>
+            <span class="cert-issuer">Programming Hub</span>
+          </button>
+          <button class="cert-card reveal" data-img="assets/certs/programminhub.webp" aria-label="View Programming Hub Java certificate">
+            <img src="assets/certs/programminhub.webp" alt="Programming Hub Java certificate" loading="lazy" />
+            <span class="cert-name">Java</span>
+            <span class="cert-issuer">Programming Hub</span>
+          </button>
+          <button class="cert-card reveal" data-img="assets/certs/pythonhub.webp" aria-label="View Programming Hub Python certificate">
+            <img src="assets/certs/pythonhub.webp" alt="Programming Hub Python certificate" loading="lazy" />
+            <span class="cert-name">Python</span>
+            <span class="cert-issuer">Programming Hub</span>
+          </button>
+          <button class="cert-card reveal" data-img="assets/certs/webmimo.webp" aria-label="View Mimo Web Development certificate">
+            <img src="assets/certs/webmimo.webp" alt="Mimo Web Development certificate" loading="lazy" />
+            <span class="cert-name">Web Development</span>
+            <span class="cert-issuer">Mimo</span>
+          </button>
+          <button class="cert-card reveal" data-img="assets/certs/cedarsbyte.webp" aria-label="View Cedars Byte internship certificate">
+            <img src="assets/certs/cedarsbyte.webp" alt="Cedars Byte mobile development internship certificate" loading="lazy" />
+            <span class="cert-name">Mobile Development Internship</span>
+            <span class="cert-issuer">Cedars Byte · 2023</span>
+          </button>
+          <button class="cert-card reveal" data-img="assets/certs/DollySoft.webp" aria-label="View Dolly Soft internship certificate">
+            <img src="assets/certs/DollySoft.webp" alt="Dolly Soft software engineering internship certificate" loading="lazy" />
+            <span class="cert-name">Software Engineering Internship</span>
+            <span class="cert-issuer">Dolly Soft · 2021</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TESTIMONIALS ================= -->
+    <section class="section section-alt" id="reviews">
+      <div class="container">
+        <p class="section-eyebrow reveal mono">06 · social proof</p>
+        <h2 class="section-title reveal">What Users Say</h2>
+        <p class="section-sub reveal">Real store reviews from apps I built.</p>
+
+        <div class="reviews-grid">
+          <figure class="review-card reveal">
+            <div class="review-stars" aria-label="5 out of 5 stars">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+            </div>
+            <blockquote>
+              "I am extremely satisfied with the work delivered on this project. From
+              start to finish, the process was smooth, professional, and well-organized."
+            </blockquote>
+            <figcaption>Nancy · OEG, App Store review</figcaption>
+          </figure>
+
+          <figure class="review-card reveal">
+            <div class="review-stars" aria-label="5 out of 5 stars">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+            </div>
+            <blockquote>
+              "Great app for students who need quick help with homework or assignments.
+              The ability to post what you need help with and communicate with tutors
+              directly makes things much easier."
+            </blockquote>
+            <figcaption>IYKNO user · Google Play review</figcaption>
+          </figure>
+
+          <figure class="review-card reveal">
+            <div class="review-stars" aria-label="5 out of 5 stars">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+            </div>
+            <blockquote>
+              "Very good service. Fast, affordable."
+            </blockquote>
+            <figcaption>Mohamad Watfa · SwiftGo, App Store review</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section class="section contact" id="contact">
+      <div class="container contact-inner">
+        <p class="section-eyebrow reveal mono">07 · contact</p>
+        <h2 class="section-title reveal">Let's Build Something</h2>
+        <p class="section-sub reveal">
+          Have a project in mind, or want a reliable mobile developer on your team?
+          Send a message below or reach out directly.
+        </p>
+
+        <form class="contact-form reveal" action="https://formsubmit.co/ousamaaboukhalil@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New message from portfolio" />
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+          <div class="form-row">
+            <div class="form-field">
+              <label for="cf-name">Name</label>
+              <input id="cf-name" type="text" name="name" required autocomplete="name" placeholder="Your name" />
+            </div>
+            <div class="form-field">
+              <label for="cf-email">Email</label>
+              <input id="cf-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg form-submit">
+            Send Message
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg>
+          </button>
+        </form>
+
+        <div class="contact-actions reveal">
+          <a class="btn btn-primary btn-lg" href="mailto:ousamaaboukhalil@gmail.com">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            ousamaaboukhalil@gmail.com
+          </a>
+          <a class="btn btn-ghost btn-lg" href="tel:+96181238678">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +961 81 238 678
+          </a>
+        </div>
+        <div class="contact-actions reveal">
+          <a class="btn btn-ghost" href="assets/Ousama-Abou-Khalil-CV.pdf" download>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+            Download CV (PDF)
+          </a>
+        </div>
+        <div class="contact-links reveal">
+          <a href="https://github.com/OusamaAbouKhalil" target="_blank" rel="noopener">GitHub</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://www.linkedin.com/in/ousama-abou-khalil" target="_blank" rel="noopener">LinkedIn</a>
+          <span aria-hidden="true">·</span>
+          <span>Beirut, Lebanon</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Ousama Abou Khalil. Built with care. No frameworks, just the web.</p>
+      <a href="#top" class="to-top" aria-label="Back to top">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+      </a>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Certificate preview" hidden>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close certificate preview">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <img id="lightboxImg" src="" alt="Certificate full view" />
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>
