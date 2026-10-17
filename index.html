@@ -875,11 +875,83 @@
   </main>
 
   <footer class="footer">
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> Ousama Abou Khalil. Built with care. No frameworks, just the web.</p>
-      <a href="#top" class="to-top" aria-label="Back to top">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
-      </a>
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <a href="#top" class="logo" aria-label="Back to top">
+            <span class="logo-mark" aria-hidden="true">&lt;/&gt;</span>
+            <span class="logo-text">ousama<span class="logo-dot">.dev</span></span>
+          </a>
+          <p class="footer-tagline">
+            Mobile &amp; web developer from Beirut. I design, build and ship
+            cross-platform products end to end.
+          </p>
+          <div class="footer-socials">
+            <a href="https://github.com/OusamaAbouKhalil" target="_blank" rel="noopener" aria-label="GitHub">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.17c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.12c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/ousama-abou-khalil" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/the_ousama" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>
+            </a>
+            <a href="mailto:ousamaaboukhalil@gmail.com" aria-label="Email">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <nav class="footer-col" aria-label="Footer navigation">
+          <h4>Explore</h4>
+          <a href="#about">About</a>
+          <a href="#apps">Apps</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills &amp; Certifications</a>
+          <a href="#reviews">Testimonials</a>
+        </nav>
+
+        <nav class="footer-col" aria-label="Featured apps">
+          <h4>Apps</h4>
+          <a href="https://apps.apple.com/us/app/oeg-online-tutors-lessons/id6444192194" target="_blank" rel="noopener">OEG: Online Tutors</a>
+          <a href="https://apps.apple.com/us/app/iykno-tutors-homework-help/id6791797037" target="_blank" rel="noopener">IYKNO</a>
+          <a href="https://apps.apple.com/us/app/clip-kitchen-video-editing/id6796904408" target="_blank" rel="noopener">Clip Kitchen</a>
+          <a href="https://apps.apple.com/us/app/swift-go/id6698877609" target="_blank" rel="noopener">SwiftGo</a>
+          <a href="https://besweet.netlify.app" target="_blank" rel="noopener">BeSweet</a>
+          <a href="https://maison-du-crepe.netlify.app" target="_blank" rel="noopener">Maison du Cr&ecirc;pe</a>
+        </nav>
+
+        <div class="footer-col" aria-label="Contact details">
+          <h4>Contact</h4>
+          <a href="mailto:ousamaaboukhalil@gmail.com">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            ousamaaboukhalil@gmail.com
+          </a>
+          <a href="tel:+96181238678">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +961 81 238 678
+          </a>
+          <span class="footer-loc">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Beirut, Lebanon
+          </span>
+          <a class="footer-cv" href="assets/Ousama-Abou-Khalil-CV.pdf" download>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+            Download CV
+          </a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> Ousama Abou Khalil. All rights reserved.</p>
+        <p class="footer-stack mono">Built with care. No frameworks, just the web.</p>
+        <a href="#top" class="to-top" aria-label="Back to top">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+        </a>
+      </div>
     </div>
   </footer>
 
